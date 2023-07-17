@@ -1,0 +1,88 @@
+
+
+* {
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #eaeaea !important;
+}
+
+nav {
+  font-size: 20px;
+  margin-bottom: 60px;
+  background-color: #f4f3f3;
+}
+
+nav ul li .active {
+  color: orangered !important;
+}
+.nav-item a{
+  margin-right: 20px;
+}
+.navbar-brand{
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+.text-bos{
+  color: blue;
+}
+
+.container-fluid a img{
+    width: 50px;
+}
+.card-img-top{
+    height: 300px;
+}
+
+#myProject {
+  background-color: white !important;
+  margin-top: 60px;
+}
+
+.container {
+  background-color: white;
+  margin-top: 60px auto;
+  padding: 10px auto;
+  border-radius: 5px;
+}
+
+.card {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.card .durasi {
+  margin-top: -40px !important;
+}
+.list-project{
+  width: 100%;
+}
+.icon a{
+  text-decoration: none;
+  list-style-type: none;
+  color: blue;
+  margin-right: 15px;
+  
+}
+.fa-arrow-down{
+  color: blue;
+}
+.button-contact{
+  margin-right: 10px;
+  background-color: red;
+}
+.warna-project{
+  
+  background-size: cover;
+  background: url(../assets/images/bg-image.jpg);
+  background-size: 450px;
+
+}
+.bg-home{
+  
+  background-size: cover;
+  background: url(https://images.unsplash.com/photo-1687873803593-8dbd3bb5e94d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80);
+ 
+}

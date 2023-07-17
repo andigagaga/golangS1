@@ -1,0 +1,143 @@
+.container{
+    background-color: transparent;
+}
+
+.form-project{
+    width: 700px;
+}
+
+
+/* project list */
+
+
+.project-list1 h1{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    /* margin-bottom: 50px; */
+    font-size: 30px;
+    font-weight: bold;
+    
+}
+.project-list2{
+    display: grid;
+    justify-content: center;
+    background-color: transparent;
+}
+.project-items1{
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    margin: 20px 10px;
+    border: 2px solid grey;
+    border-radius: 8px;
+    background-color: lightgrey;
+    box-shadow: 0px 0px 20px;
+}
+
+    
+    /* width: 30%; */
+.project-items-container{
+   width: 80%;
+   
+   padding: 0px;
+
+}
+.project-items-container div{
+    margin-top: 1px;
+}
+.project-items-container .project-list-paraf p{
+    /* font-weight: normal; */
+    /* font-size: 14px; */
+    line-height: 20px;
+    text-align: justify;
+}
+.project-items-image img{
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px;
+    margin-top: 20px;
+    object-fit: contain;
+    /* transition-duration: 0.2s;
+  transition-property: transform; */
+}
+/* .project-items-image img:hover{
+    border: 5px solid grey;
+    transform: scale(1.1);
+} */
+.project-items-judul{
+    margin-top: 5px;
+}
+.project-items-post{
+    color: blue;
+}
+
+/* .project-items-judul button{
+    display: flex;
+    justify-content: right;
+} */
+.project-items-image button{
+    display: flex;
+    justify-content: right;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    /* margin-left: 330px; */
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+    color: white;
+    background-color: black;
+    /* text-decoration: none;
+    list-style-type: none; */
+}
+.project-items-image a{
+    text-decoration: none;
+}
+.project-list-icon i{
+    margin-right: 30px;
+    font-size: 25px;
+    margin-top: 25px;
+}
+.button-project{
+    display: flex;
+    justify-content: center;
+    
+ 
+    
+}
+.button-project .button-project-edit{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 35px;
+    margin-right: 10px;
+    border-radius: 8px;
+    align-items: center;
+    background-color: black;
+}
+.button-project .button-project-delete{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 35px;
+    margin-right: 10px;
+    border-radius: 8px;
+    padding: 8px;
+    align-items: center;
+    background-color: black;
+}
+.button-project a{
+    color: black;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: 0px 70px;
+    color: white;
+    font-size: large;
+    
+}
+
+
