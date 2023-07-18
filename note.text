@@ -2,3 +2,7 @@ tugas go mod untuk membangun modul dari apk  golang
 main.go file utamnya dan package main harus
 echo adalah framework untuk membangun website dan server
 guna := adalah itu mendeklarasikan
+
+git add . ; git commit -m ("nama branch baru") 
+git checkout -B ("nama barnch")
+git push origin ("nama branch")
