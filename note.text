@@ -12,3 +12,30 @@ tapi pas nyoba lah ko enakkkkk
 nagih dehh.......
 
 struck and interface adalah untuk meng organisir method dan cara nya / penampung data / method fungsinya adalah membuat / membangun beberapa bject / propertis / mirip dengan js
+
+..............PGADMIN..............
+munculin data dari data base
+table: berfungsi untuk penampung data nya
+       // isi/menu dari tabel
+       -NOT NUL = harus diisi ga boleh kosong      
+       -primary key = kunci utaman - untuk menyimpan data dan mengambil value nya
+       -SERIAL untuk mengisi data/value secara otomatis (contoh pada id)
+       -defailt tabel lengt adalah 255
+       -author =  pengarang
+       -insert = menambahkan da
+       -select script = untuk menampilkan data tabelnya
+       -delete script = untuk menghapus tabel/data
+       -update script = untuk update/ubah tabel/data
+
+
+
+// JACKC PGX = penghubung data base dengan server
+GETENV = untuk menyimpan data rahasia = password
+
+// CARA CONNECTION DATA BASE KE GOLANG
+- INSTAL  DAHULU PACKAGE PGX GOLANG NYA PAKAI ("github.com/jackc/pgx/v5")
+-TAMBAHKAN PACKAGE NYA KE CODE KALIAN ("postgres://username:password@localhost:port/db_name" )
+       username =  user dari data base nya
+       password = password dari data base  nya
+       host = host dari data base (localhost)
+       port = port dari database (5432)

@@ -32,7 +32,7 @@
                                 class="text-secondary">me</b></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="addproject">Add Project</a>
+                        <a class="nav-link" href="addproject-data">My Project</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="testimonial">My Testimonial</a>
@@ -104,9 +104,10 @@
             style="display: flex;justify-content: center ;margin-top: 20px;color: black;font-weight: bold; background-color: white;">
             MY PROJECT
         </h1>
+        
         <section id="project" class="d-flex mt-5 row ">
-            {{range $index, $data := .Projects}}
-
+            {{ range $index, $data := .Blogs }}
+            
             <div id="mockup" class="project-list1 col ">
                 <div class="project-list2" id="project-list2" style="background-color: transparent;">
                     <div class="project-items1" id="project-items1">
@@ -120,8 +121,8 @@
 
                             </div>
                             <div class="project-items-judul">
-                                <h4><a  style="text-decoration: none;list-style-type: none;color: black;" >{{$data.Name}}</a></h4>
-                                <h6 class="project-items-post">01 08 2003</h6>
+                                <h4>{{$data.Name}} {{$data.Id}}</h4>
+                                <h6 class="project-items-post">{{$data.StarDate }} ✨ {{$data.EndDate }}</h6>
                                 <h5 class="project-items-duration" id="project-items-duration">{{$data.Duration }}</h5>
                             </div>
                             <div class="project-list-paraf mt-5">
@@ -130,11 +131,14 @@
                             <div class="project-list-icon d-flex mb-5" id="project-list-icon">
                                 {{if $data.Playstore}}
                                 <i class="fa-brands fa-node-js"></i>
-                                {{end}}{{if $data.Android}}
+                                {{end}}
+                                {{if $data.Android}}
                                 <i class="fa-brands fa-android"></i>
-                                {{end}}{{if $data.Java}}
+                                {{end}}
+                                {{if $data.Java}}
                                 <i class="fa-brands fa-java"></i>
-                                {{end}}{{if $data.React}}
+                                {{end}}
+                                {{if $data.React}}
                                 <i class="fa-brands fa-react"></i>
                                 {{end}}
                             </div>
@@ -168,7 +172,7 @@
         </section>
     </div>
 
-    <script src="publis/js/index.js"></script>
+    <!-- <script src="publis/js/index.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>

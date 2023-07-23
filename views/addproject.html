@@ -30,7 +30,7 @@
                         <a class="nav-link" aria-current="page" href="index">Ho<b class="text-secondary">me</b></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="addproject">Add Project</a>
+                        <a class="nav-link active" href="addproject-data">My Project</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="testimonial">My Testimonial</a>
@@ -58,125 +58,72 @@
     <!-- navbar with boostrap akhir-->
 
     <!-- awal-form-project-with-bootstrap -->
-    <div class="container ">
-        <div class=" row">
-            <div class=" row my-5 mx-2  p-3 d-flex justify-content-center">
-                <form action="/index" method="POST" class="mb-4 form-project">
-                    <div class="mb-5">
-                        <label for="input-project-title" class="form-label">Name Project</label>
-                        <input type="text" class="form-control" name="input-project-title" aria-describedby="emailHelp">
-                    </div>
-                    <div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="mb-5">
-                                    <label for="input-startdate" class="form-label">Start Date</label>
-                                    <input type="date" class="form-control" name="input-startdate">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="mb-5">
-                                    <label for="input-enddate" class="form-label">End Date</label>
-                                    <input type="date" class="form-control" name="input-enddate">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-5">
-                        <label for="deskripsi" class="form-label">Message</label>
-                        <textarea class="form-control" name="input-description" rows="3"></textarea>
-                    </div>
-                    <div class="mb-5">
-                        <div class="row">
-                            <label class="judul-cekbox mb-3" for="cekbox">Technologies</label>
-                            <div class="col">
-                                
-                                <div class="form-check mb-3">
-                                    <input class="form-check-input" type="checkbox" value="checked" name="nodejs" id="nodejs">
-                                    <label class="form-check-label" for="nodejs">
-                                        Node js
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="checked" name="reactjs" id="reactjs">
-                                    <label class="form-check-label" for="reactjs">
-                                        React js
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-check mb-3">
-                                    <input class="form-check-input" type="checkbox" value="checked" name="nextjs" id="nextjs">
-                                    <label class="form-check-label" for="nextjs">
-                                        Next Js
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="checked" name="typescript" id="typescript">
-                                    <label class="form-check-label" for="typescript">
-                                        Type Script
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-5">
-                        <label for="input-project-image" class="form-label">Upload Images</label>
-                        <input type="file" class="form-control" name="input-project-image" aria-describedby="emailHelp">
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <button  type="submit" class="btn btn-secondary">Submit</button>
-                    </div>
-                   
-                </form>
-            </div>
-    
-        </div>
-    </div>
+   
    
 
     <div class="card">
-        <section id="project" class="row warna-project">
-            <h1 style="display: flex;justify-content: center;margin-top: 15px;">MY PROJECT</h1>
-            <div id="mockup" class="project-list1 col">
-                <!-- <div class="project-list2" id="project-list2" style="background-color: transparent;">
-                      <div class="project-items1" id="project-items1">
-                          <div class="project-items-container">
-                              <div class="project-items-image">
-                                  <img src="/public/assets/images/card1.jpg" alt="project-list1"  />
-                                  <a href="project-detail.html" target="_blank">
-                                      <button>Detail Project</button>
-                                  </a>
-                                  
-                                  
-                              </div>
-                              <div class="project-items-judul">
-                                  <h>Imajinasi Yang Crazy</h>
-                                  <h6 class="project-items-post">01 08 2003</h6>
-                                  <h5 class="project-items-duration" id="project-items-duration">durasi : 3 bulan</h5>
-                              </div>
-                              <div class="project-list-paraf">
-                                  <p>Mungkin Anda sering mendengar istilah Konoha di media sosial atau televisi. Istilah itu pun sering kali menjadi trending di Twitter. </p>
-                              </div>
-                              <div class="project-list-icon" id="project-list-icon">
-                                  <i class="fa-brands fa-node-js"></i>
-                                  <i class="fa-brands fa-android"></i>
-                                  <i class="fa-brands fa-java"></i>
-                                  <i class="fa-brands fa-react"></i>
-                              </div>
-                          
-                              <div class="button-project" id="button-project">
-                                  <button class="button-project-edit">
-                                      <a href="#" >edit</a>
-                                  </button>
-                                  <button  class="button-project-delete">
-                                      <a href="#">delete</a>
-                                  </button>
-                              </div>
-                          </div>
-                      </div>
-                  </div> -->
+        <button class=" btn btn-dark d-flex justify-content-center mx-5 my-3" style="width: 20%;"><a class="text-decoration-none text-light" href="formaddproject">ADD PROJECT</a></button>
+        <section id="project" class="d-flex mt-5 row ">
+            {{range $index, $data := .Projects}}
+            
+            <div id="mockup" class="project-list1 col ">
+                <div class="project-list2" id="project-list2" style="background-color: transparent;">
+                    <div class="project-items1" id="project-items1">
+                        <div class="project-items-container">
+                            <div class="project-items-image">
+                                <img src="public/assets/images/card1.jpg" alt="project-list1" />
+                                <a href="project-detail/{{$index}}" target="_blank">
+                                    <button class="mt-5">Detail Project</button>
+                                </a>
+
+
+                            </div>
+                            <div class="project-items-judul">
+                                <h4><a  style="text-decoration: none;list-style-type: none;color: black;" >{{$data.Name}}</a></h4>
+                                <h6 class="project-items-post">{{$data.StarDate }} ✨ {{$data.EndDate }}</h6>
+                                <h5 class="project-items-duration" id="project-items-duration">{{$data.Duration }}</h5>
+                            </div>
+                            <div class="project-list-paraf mt-5">
+                                <p>{{$data.Detail }}</p>
+                            </div>
+                            <div class="project-list-icon d-flex mb-5" id="project-list-icon">
+                                {{if $data.Playstore}}
+                                <i class="fa-brands fa-node-js"></i>
+                                {{end}}{{if $data.Android}}
+                                <i class="fa-brands fa-android"></i>
+                                {{end}}{{if $data.Java}}
+                                <i class="fa-brands fa-java"></i>
+                                {{end}}{{if $data.React}}
+                                <i class="fa-brands fa-react"></i>
+                                {{end}}
+                            </div>
+
+                            <div class="button-project mb-5 " id="button-project">
+                                <form
+                                class="d-inline1"
+                                action="/edit-addproject/{{$index}}"
+                                method="GET"
+                                style="width: 100%"
+                              >
+                                <button class="btn btn-dark" style="width: 100%">edit</button>
+                              </form>
+                                
+                                <form
+                                class="d-inline"
+                                action="/delete-addproject/{{$index}}"
+                                method="POST"
+                                style="width: 100%"
+                              >
+                                <button class="btn-delete-project btn btn-dark" style="width: 100%">delete</button>
+                              </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            {{end}}   
+
         </section>
     </div>
 
