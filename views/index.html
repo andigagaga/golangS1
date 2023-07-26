@@ -114,15 +114,15 @@
                         <div class="project-items-container">
                             <div class="project-items-image">
                                 <img src="public/assets/images/card1.jpg" alt="project-list1" />
-                                <a href="project-detail/{{$index}}" target="_blank">
+                                <a href="project-detail/{{$data.Id}}" target="_blank">
                                     <button class="mt-5">Detail Project</button>
                                 </a>
 
 
                             </div>
                             <div class="project-items-judul">
-                                <h4>{{$data.Name}} {{$data.Id}}</h4>
-                                <h6 class="project-items-post">{{$data.StarDate }} ✨ {{$data.EndDate }}</h6>
+                                <h4>{{$data.Name}}</h4>
+                                <h6 class="project-items-post">{{$data.StarDate }} ⏰ {{$data.EndDate }}</h6>
                                 <h5 class="project-items-duration" id="project-items-duration">{{$data.Duration }}</h5>
                             </div>
                             <div class="project-list-paraf mt-5">
@@ -146,18 +146,18 @@
                             <div class="button-project mx-5 " id="button-project">
                                 <form
                                 class="d-inline1"
-                                action="/edit-addproject/{{$index}}"
+                                action="/edit-project/{{$data.Id}}"
                                 method="GET"
-                                style="width: 100%"
+                                style="width: 100%; margin: 10px;"
                               >
                                 <button class="btn btn-dark" style="width: 100%">edit</button>
                               </form>
                                 
                                 <form
                                 class="d-inline"
-                                action="/delete-addproject/{{$index}}"
+                                action="/delete-addproject/{{$data.Id}}"
                                 method="POST"
-                                style="width: 100%"
+                                style="width: 100%; margin: 10px;"
                               >
                                 <button class="btn-delete-project btn btn-dark" style="width: 100%">delete</button>
                               </form>

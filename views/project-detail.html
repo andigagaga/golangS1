@@ -60,12 +60,12 @@
     <!-- navbar with boostrap akhir-->
 
     <!-- awal detail project -->
-   
+    {{$data := .Project}}
     <div class="container-fluid">
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center mb-5">
-                    <h1><b>{{.Project.Name}}</b></h1>
+                    <h1><b>{{$data.Name}}</b></h1>
                 </div>
             </div>
 
@@ -76,26 +76,26 @@
                 <div class="col-lg-3 text-center offset-2 mt-5">
                     <div  class="project-detail-container-items-icon mt-5">
                         <div style="width: 130%;" class="duration mb-5 text-start">
-                            <i class="fa-solid fa-calendar-days mb-3">{{.Project.StarDate}} ✨ {{.Project.EndDate}}</i>
-                            <i class="fa-regular fa-clock">{{.Project.Duration}}</i>
+                            <i class="fa-solid fa-calendar-days mb-3">{{$data.StarDate}} ✨ {{$data.EndDate}}</i>
+                            <i class="fa-regular fa-clock">{{$data.Duration}}</i>
                         </div>
                         <div class="iconik text-start">
                             <div class="mb-5">
-                                {{if.Project.Playstore}}
+                                {{if $data.Playstore}}
                                 <i class="fa-brands fa-react"></i>React Js {{end}}
                                 
 
-                                {{if.Project.Android}}
+                                {{if $data.Android}}
                                 <i class="fa-brands fa-node-js"></i>Node Js {{end}}
                                
                             </div>
                             
                             <div">
-                            {{if.Project.Java}}
+                            {{if $data.Java}}
                                 <i class="fa-brands fa-js"></i>Java Scrip {{end}}
                            
                             React
-                            {{if.Project.Name}}
+                            {{if $data.React}}
                                 <i class="fa-brands fa-ioxhost"></i>Socket IO {{end}}
                            
                             </div>
@@ -110,7 +110,7 @@
             <div class="mt-5 mb-5   text-start paraf-detail-project">
                 <p class="mx-5 ">
                     <b>
-                        {{.Project.Detail}}
+                        {{$data.Detail}}
                     </b>
                     
                 </p>

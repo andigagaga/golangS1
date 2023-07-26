@@ -28,7 +28,7 @@ type Project struct {
 var dataProject = []Project{
 	// {
 	// 	Id:        0,
-	// 	Name:      "Project 1",
+	// 	Name:      "Contoh Project-1",
 	// 	StarDate:  "15-05-2023",
 	// 	EndDate:   "15-06-2023",
 	// 	Duration:  "1 bulan",
@@ -41,7 +41,7 @@ var dataProject = []Project{
 
 	// {
 	// 	Id:        1,
-	// 	Name:      "Project 2",
+	// 	Name:      "Contoh Projec-2",
 	// 	StarDate:  "15-05-2023",
 	// 	EndDate:   "15-06-2023",
 	// 	Duration:  "1 bulan",
@@ -77,7 +77,7 @@ func main() {
 	// rout post nya
 	e.POST("/delete-addproject/:id", deleteProject)
 	e.POST("/edit-addproject/:id", submitEditedProject)
-	e.POST("/addproject", saveProject)
+	e.POST("/addproject", submitProject)
 
 	e.Logger.Fatal(e.Start(":1234"))
 }
@@ -115,13 +115,28 @@ func home(c echo.Context) error {
 	return tmpl.Execute(c.Response(), dataIndex)
 }
 func project(c echo.Context) error {
+
+	data, _ := connection.Conn.Query(context.Background(), "SELECT id, name, start_date, end_date, duration, detail, playstore, android, java, react FROM tb_project")
+
+	var result []Project
+	for data.Next() {
+		var each = Project{}
+		err := data.Scan(&each.Id, &each.Name, &each.StarDate, &each.EndDate, &each.Duration, &each.Detail, &each.Playstore, &each.Android, &each.Java, &each.React)
+
+		if err != nil {
+			fmt.Println(err.Error())
+			return c.JSON(http.StatusInternalServerError, err.Error())
+		}
+		result = append(result, each)
+
+	}
 	var tmpl, err = template.ParseFiles("views/addproject.html")
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
 	}
 	Projects := map[string]interface{}{
-		"Projects": dataProject,
+		"Projects": result,
 	}
 
 	return tmpl.Execute(c.Response(), Projects)
@@ -136,141 +151,8 @@ func formproject(c echo.Context) error {
 
 	return tmpl.Execute(c.Response(), nil)
 }
-
-// detail project
-func projectDetail(c echo.Context) error {
-	// strconcov/string converter = untuk conver tipe data lain jadi string
-	id, _ := strconv.Atoi(c.Param("id"))
-
-	var ProjectDetail = Project{}
-
-	for i, data := range dataProject {
-		if id == i {
-			ProjectDetail = Project{
-				Name:      data.Name,
-				StarDate:  data.StarDate,
-				EndDate:   data.EndDate,
-				Duration:  data.Duration,
-				Detail:    data.Detail,
-				Playstore: data.Playstore,
-				Android:   data.Android,
-				Java:      data.Java,
-				React:     data.React,
-			}
-		}
-	}
-	data := map[string]interface{}{
-		"Project": ProjectDetail,
-	}
-
-	var tmpl, err = template.ParseFiles("views/project-detail.html")
-	if err != nil {
-		return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
-	}
-
-	return tmpl.Execute(c.Response(), data)
-}
-func editProject(c echo.Context) error {
-	id, _ := strconv.Atoi(c.Param("id"))
-
-	var ProjectDetail = Project{}
-
-	for i, data := range dataProject {
-		if id == i {
-			ProjectDetail = Project{
-				Name:      data.Name,
-				StarDate:  data.StarDate,
-				EndDate:   data.EndDate,
-				Duration:  data.Duration,
-				Detail:    data.Detail,
-				Playstore: data.Playstore,
-				Android:   data.Android,
-				Java:      data.Java,
-				React:     data.React,
-			}
-		}
-	}
-	data := map[string]interface{}{
-		"Project": ProjectDetail,
-		"Id":      id,
-	}
-
-	var tmpl, err = template.ParseFiles("views/editproject.html")
-	if err != nil {
-		return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
-	}
-
-	return tmpl.Execute(c.Response(), data)
-
-}
-func submitEditedProject(c echo.Context) error {
-
-	// Menangkap Id dari Query Params
-	id, _ := strconv.Atoi(c.Param("id"))
-
-	name := c.FormValue("input-project-title")
-	starDate := c.FormValue("input-startdate")
-	endDate := c.FormValue("input-enddate")
-	detail := c.FormValue("input-description")
-	// checkbox
-	var nodejs bool
-	if c.FormValue("nodejs") == "checked" {
-		nodejs = true
-	}
-
-	var reactjs bool
-	if c.FormValue("reactjs") == "checked" {
-		reactjs = true
-	}
-
-	var nextjs bool
-	if c.FormValue("nextjs") == "checked" {
-		nextjs = true
-	}
-
-	var typescript bool
-	if c.FormValue("typescript") == "checked" {
-		typescript = true
-	}
-
-	var editedProject = Project{
-		Name:      name,
-		StarDate:  starDate,
-		EndDate:   endDate,
-		Duration:  countDuration(starDate, endDate),
-		Detail:    detail,
-		Playstore: nodejs,
-		Android:   reactjs,
-		Java:      nextjs,
-		React:     typescript,
-	}
-
-	dataProject[id] = editedProject
-	return c.Redirect(http.StatusMovedPermanently, "/addproject-data")
-}
-func countDuration(d1 string, d2 string) string {
-	date1, _ := time.Parse("2006-01-02", d1)
-	date2, _ := time.Parse("2006-01-02", d2)
-
-	diff := date2.Sub(date1)
-	days := int(diff.Hours() / 24)
-	weeks := days / 7
-	months := days / 30
-
-	if months > 12 {
-		return strconv.Itoa(months/12) + " tahun"
-	}
-	if months > 0 {
-		return strconv.Itoa(months) + " bulan"
-	}
-	if weeks > 0 {
-		return strconv.Itoa(weeks) + " minggu"
-	}
-	return strconv.Itoa(days) + " hari"
-}
-
 // func untuk rout post nyaaa
-func saveProject(c echo.Context) error {
+func submitProject(c echo.Context) error {
 	name := c.FormValue("input-project-title")
 	detail := c.FormValue("input-description")
 
@@ -319,28 +201,138 @@ func saveProject(c echo.Context) error {
 		typescript = true
 	}
 
-	var newProject = Project{
-		Name:      name,
-		StarDate:  starDate,
-		EndDate:   endDate,
-		Duration:  diffUse,
-		Detail:    detail,
-		Playstore: nodejs,
-		Android:   reactjs,
-		Java:      nextjs,
-		React:     typescript,
-	}
+	
+	_, err := connection.Conn.Exec(context.Background(), "INSERT INTO tb_project (name, detail, start_date, end_date, duration, playstore, android, java, react) VALUES ($1 , $2, $3, $4, $5, $6, $7, $8, $9)", name, detail, starDate, endDate, diffUse, nodejs, reactjs, nextjs, typescript,)
 
-	dataProject = append(dataProject, newProject)
+	if err != nil{
+		c.JSON(http.StatusInternalServerError, err.Error())
+	}
 
 	fmt.Println(dataProject)
 
 	return c.Redirect(http.StatusMovedPermanently, "/addproject-data")
 }
+
+// detail project
+func projectDetail(c echo.Context) error {
+	// strconcov/string converter = untuk conver tipe data lain jadi string
+	id := c.Param("id")
+	var tmpl, errTmp= template.ParseFiles("views/project-detail.html")
+
+	idToInt, _ := strconv.Atoi(id)
+
+	var ProjectDetail = Project{}
+
+	// query row untuk nge get satu datanya
+	err := connection.Conn.QueryRow(context.Background(), "SELECT id, name, start_date, end_date, duration, detail, playstore, android, java, react FROM tb_project WHERE id=$1", idToInt).Scan(&ProjectDetail.Id, &ProjectDetail.Name, &ProjectDetail.StarDate, &ProjectDetail.EndDate, &ProjectDetail.Duration, &ProjectDetail.Detail, &ProjectDetail.Playstore, &ProjectDetail.Android, &ProjectDetail.Java, &ProjectDetail.React)
+
+	fmt.Println("ini data blog detail", err)
+
+	if err != nil{
+		return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+	}
+	data := map[string]interface{}{
+		"Id":   id,
+		"Project": ProjectDetail,
+	}
+
+	
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"message": errTmp.Error()})
+	}
+
+	return tmpl.Execute(c.Response(), data)
+}
+func editProject(c echo.Context) error {
+	id, _ := strconv.Atoi(c.Param("id"))
+
+	var ProjectDetail = Project{}
+
+	err := connection.Conn.QueryRow(context.Background(), "SELECT * FROM tb_project WHERE id=$1", id).Scan(&ProjectDetail.Name, &ProjectDetail.StarDate, &ProjectDetail.EndDate, &ProjectDetail.Duration, &ProjectDetail.Detail, &ProjectDetail.Playstore, &ProjectDetail.Android, &ProjectDetail.Java, &ProjectDetail.React)
+
+	if err != nil{
+		return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+	}
+	data := map[string]interface{}{
+		"Project": ProjectDetail,
+		"Id":      id,
+	}
+
+	var tmpl, errTmp = template.ParseFiles("views/editproject.html")
+	if errTmp != nil {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+	}
+
+	return tmpl.Execute(c.Response(), data)
+
+}
+func submitEditedProject(c echo.Context) error {
+
+	// Menangkap Id dari Query Params
+	id, _ := strconv.Atoi(c.Param("id"))
+
+	name := c.FormValue("input-project-title")
+	starDate := c.FormValue("input-startdate")
+	endDate := c.FormValue("input-enddate")
+	detail := c.FormValue("input-description")
+	// checkbox
+	var nodejs bool
+	if c.FormValue("nodejs") == "checked" {
+		nodejs = true
+	}
+
+	var reactjs bool
+	if c.FormValue("reactjs") == "checked" {
+		reactjs = true
+	}
+
+	var nextjs bool
+	if c.FormValue("nextjs") == "checked" {
+		nextjs = true
+	}
+
+	var typescript bool
+	if c.FormValue("typescript") == "checked" {
+		typescript = true
+	}
+
+	// dataProject[id] = editedProject
+	_, err := connection.Conn.Exec(context.Background(), "UPDATE tb_project SET name=$1, start_date=$2, end_date=$3, duration=$4, detail=$5, playstore=$6, android=$7, java=$8, react=$9, WHERE id=$10", name, starDate, endDate, detail, nodejs, reactjs, nextjs, typescript, id)
+
+	if err != nil{
+		return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+	}
+
+
+	return c.Redirect(http.StatusMovedPermanently, "/addproject-data")
+}
 func deleteProject(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
-	dataProject = append(dataProject[:id], dataProject[id+1:]...)
+	// dataProject = append(dataProject[:id], dataProject[id+1:]...)
+
+	// query delete to data base
+	connection.Conn.Exec(context.Background(), "DELETE FROM tb_project WHERE id=$1", id)
 	return c.Redirect(http.StatusMovedPermanently, "/addproject-data")
+}
+func countDuration(d1 string, d2 string) string {
+	date1, _ := time.Parse("2006-01-02", d1)
+	date2, _ := time.Parse("2006-01-02", d2)
+
+	diff := date2.Sub(date1)
+	days := int(diff.Hours() / 24)
+	weeks := days / 7
+	months := days / 30
+
+	if months > 12 {
+		return strconv.Itoa(months/12) + " tahun"
+	}
+	if months > 0 {
+		return strconv.Itoa(months) + " bulan"
+	}
+	if weeks > 0 {
+		return strconv.Itoa(weeks) + " minggu"
+	}
+	return strconv.Itoa(days) + " hari"
 }
 func testimonial(c echo.Context) error {
 	var tmpl, err = template.ParseFiles("views/testimonial.html")

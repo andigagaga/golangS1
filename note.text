@@ -11,7 +11,7 @@ gw sebenernya gtw apa apa codingan
 tapi pas nyoba lah ko enakkkkk
 nagih dehh.......
 
-struck and interface adalah untuk meng organisir method dan cara nya / penampung data / method fungsinya adalah membuat / membangun beberapa bject / propertis / mirip dengan js
+struck and interface adalah untuk meng organisir method dan cara nya / penampung data / method fungsinya adalah membuat / membangun beberapa object / propertis / mirip dengan js
 
 ..............PGADMIN..............
 munculin data dari data base
@@ -39,3 +39,28 @@ GETENV = untuk menyimpan data rahasia = password
        password = password dari data base  nya
        host = host dari data base (localhost)
        port = port dari database (5432)
+
+
+
+//................................DAY-14........................................
+-query untuk get data bnyak
+-query row = untuk get 1 data / satu baris data
+-exec = untuk mengeksekusi / dia ga bawa return value karena dia cuma memproses
+-.scan = masukin data ke dalam struct
+-& kenapa ga pakai each karena cuma untuk nambahin 1 data
+-$1 = vaalue pertama / id mksdnya bahwa $1 akan diisi oleh id berurutan
+-insert into = untuk inserrt data base nya / buat data
+-
+	if err != nil{
+		return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+	} = mksdnya if tidak sama dengan eror maka c.jsonnya akan diisi oleh status StatusInternalServerError, map string mksdnya dengan value apa yg akan kita kirim
+
+
+
+//................................DAY15........................................
+-auntentication = login dan 
+-c request untuk menerima inputan data dari html
+-parse form untuk menerima inputan dari sebuah form
+-sess.options.MaxAge = lama dari sesinya , kalau lewat dari waktu yg kita tentukan maka kita akan log ulang
+-bycripr = untuk membuktikan apa data nya bener
+-encrip = ga bisa d balikin
